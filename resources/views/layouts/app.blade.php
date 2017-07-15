@@ -16,6 +16,8 @@
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('/css/jquery.dataTables.css')}}" rel="stylesheet">
     <link href="{{asset('/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/selectize.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/selectize.bootstrap3.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -53,7 +55,12 @@
                     @role('admin')
                     <li><a href="{{route('authors.index')}}">Penulis</a></li>
                     <li><a href="{{route('books.index')}}">Buku</a></li>
+                    <li><a href="{{route('members.index')}}">Member</li>
+                    <li><a href="{{route('statistics.index')}}">Peminjaman</li>
                     @endrole
+                    @if (auth()->check())
+                    <li><a href="{{url('/settings/profile')}}">Profil</a></li>
+                    @endif
                         &nbsp;
                     </ul>
 
@@ -80,6 +87,8 @@
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                         <ul class="dropdown-menu" role="menu"></ul>
+                                        <li><a href="{{url('/settings/password')}}"><i class="fa fa-btn fa-lock"></i>Ubah Password</a></li>
                                     </li>
                                 </ul>
                             </li>
@@ -99,6 +108,7 @@
     <!-- <script src="{{asset('/js/bootstrap.min.js')}}"></script> -->
     @include('layouts.menu')
     @include('layouts.profile')
+    <script src="{{asset('/js/selectize.min.js')}}"></script>
      <script src="{{asset('/js/custom.js')}}"></script>
     @yield('scripts')
 
